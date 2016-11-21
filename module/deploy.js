@@ -9,9 +9,9 @@ const config = require('../config/config.js'),
     shelljs.cd(modulePath);
     let out = shelljs.exec('git pull');
     if (out.code == 0 ) {
-      mail(out.stdout,error);
+      mail(out.stdout,out.code);
     }else{
-      mail(out.stderr,error);
+      mail(out.stderr,out.code);
     }
   }
 

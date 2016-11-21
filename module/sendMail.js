@@ -1,14 +1,14 @@
-var nodemailer = require('nodemailer');
-
+let nodemailer = require('nodemailer');
+let config = require('../config/config.js')
 // create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport('smtps://503241187@qq.com:pwd@smtp.qq.com');
+let transporter = nodemailer.createTransport(`smtps://${config.mail.from}:${config.mail.pwd}@${config.mail.smtp}`);
 
 // setup e-mail data with unicode symbols
 module.exports = function (body, error) {
-  var mailOptions = {
-    from: '"自动部署" <503241187@qq.com>', // sender address
-    to: '503241187@qq.com', // list of receivers
-    subject: '上线通知 ' + (error ? "--失败" :''), // Subject line
+  let mailOptions = {
+    from: `"自动部署" <${config.mail.from}>`, // sender address
+    to: config.mail.to, // list of receivers
+    subject: config.mail.subject + (error ? "--失败" :''), // Subject line
     text: body, // plaintext body
     html: body // html body
 };
