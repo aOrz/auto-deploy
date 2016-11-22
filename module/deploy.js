@@ -9,16 +9,16 @@ const config = require('../config/config.js'),
     shelljs.cd(modulePath);
     let out = shelljs.exec('git pull');
     if (out.code == 0 ) {
-      mail(out.stdout,out.code);
+      mail(out.stdout, out.code, moduleName);
     }else{
-      mail(out.stderr,out.code);
+      mail(out.stderr, out.code, moduleName);
     }
   }
 
   function clone(moduleName) {
     let rootPath = path.resolve(config.root);
     shelljs.cd(rootPath);
-    let out = shelljs.exec(`git clone git@github.com:${config.user}/${moduleName}`);
+    let out = shelljs.exec(`git clone ${config.url}:${config.user}/${moduleName}`);
     if (out.code == 0 ) {
       mail(out.stdout);
     }else{
