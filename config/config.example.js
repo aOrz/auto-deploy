@@ -1,5 +1,6 @@
 module.exports = {
   port: 3000,//端口号
+  host: 'fddcn.cn',
   root: '../', //部署路径相对于部署程序的路径
   user: '4013465w',//github 用户名，暂时仅支持 github
   mail:{
