@@ -31,7 +31,7 @@ module.exports = function (moduleName) {
     if (!shelljs.which('git')) {
     ret = 'Sorry, this script requires git';
   }
-  console.log(config.root,moduleName)
+  // console.log(config.root,moduleName)
   let modulePath = path.resolve(config.root,moduleName);
   let exists = fs.existsSync(modulePath);
   if (exists) {

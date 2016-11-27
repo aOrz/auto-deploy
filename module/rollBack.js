@@ -1,0 +1,24 @@
+const shelljs = require('shelljs');
+
+function getRollBackTag() {
+  let out = shelljs.exec('git tag -n --sort=-taggerdate | grep n1 ');
+  if (out.code == 0) {
+    return out.stdout;
+  } else {
+    return 'error';
+  }
+}
+
+function rollBack(tag) {
+  let out = shelljs.exec(`git log --format="%h" ${tag} |grep n1`);
+  if (out.code) {
+    return out.code;
+  }
+  out = shelljs.exec(`get reset --hard ${out.stdout} `);
+  return out.code;
+}
+
+module.exports = {
+  rollBack: rollBack,
+  getRollBackTag: getRollBackTag
+};
