@@ -1,6 +1,7 @@
 const config = require('../config/config.js'),
   fs = require('fs'),
   path = require('path'),
+  rollBack = require('./rollBack.js'),
   shelljs = require('shelljs'),
   mail = require('./sendMail.js');
 
@@ -9,7 +10,8 @@ const config = require('../config/config.js'),
     shelljs.cd(modulePath);
     let out = shelljs.exec('git pull');
     if (out.code == 0 ) {
-      mail(out.stdout, out.code, moduleName);
+      let ret = rollBack.getRollBackTag();
+      mail(out.stdout + `<br/><a href="${config.host}:${config.port}/roll_back/${ret}">回滚</a>`, out.code, moduleName);
     }else{
       mail(out.stderr, out.code, moduleName);
     }
