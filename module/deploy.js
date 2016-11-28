@@ -11,7 +11,7 @@ const config = require('../config/config.js'),
     let out = shelljs.exec('git pull');
     if (out.code == 0 ) {
       let ret = rollBack.getRollBackTag();
-      mail(out.stdout + `<br/><a href="${config.host}:${config.port}/roll_back/${ret}">回滚</a>`, out.code, moduleName);
+      mail(out.stdout + ret, out.code, moduleName);
     }else{
       mail(out.stderr, out.code, moduleName);
     }
