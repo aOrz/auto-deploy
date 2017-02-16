@@ -10,7 +10,7 @@ module.exports = {
     to: '503241187@qq.com' //部署邮件接收邮箱
   },
   serverChan: {
-    subject: '上线通知',//邮件主题
+    subject: '上线通知',//主题
     sckey: 'SCU5965T351aefdf9da33c3debc59213a432ed5e58a464b74b733'
   }
 }
