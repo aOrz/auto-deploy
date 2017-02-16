@@ -2,16 +2,16 @@ const config = require('../config/config.js'),
   fs = require('fs'),
   path = require('path'),
   shelljs = require('shelljs'),
-  mail = require('./sendMail.js');
+  message = require('./sendMessage.js');
 
   function pull(moduleName) {
     let modulePath = path.resolve(config.root,moduleName);
     shelljs.cd(modulePath);
     let out = shelljs.exec('git pull');
     if (out.code == 0 ) {
-      mail(out.stdout,out.code);
+      message(out.stdout,out.code);
     }else{
-      mail(out.stderr,out.code);
+      message(out.stderr,out.code);
     }
   }
 
@@ -20,9 +20,9 @@ const config = require('../config/config.js'),
     shelljs.cd(rootPath);
     let out = shelljs.exec(`git clone git@github.com:${config.user}/${moduleName}`);
     if (out.code == 0 ) {
-      mail(out.stdout);
+      message(out.stdout);
     }else{
-      mail(out.stderr);
+      message(out.stderr);
     }
   }
 
