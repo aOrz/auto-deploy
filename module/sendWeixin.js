@@ -4,7 +4,7 @@ var qs = require('querystring');
 var config = require('../config/config.js');
 
 const Imis = require('imis-server-sdk');
-const imis = new Imis(config.serverChan.sckey, 'auto-deploy');
+const imis = new Imis(config.serverChan.imis, 'auto-deploy');
 
 module.exports = function(body, error) {
   var data = {
