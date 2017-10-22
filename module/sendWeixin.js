@@ -2,21 +2,20 @@ var http = require('http');
 
 var qs = require('querystring');
 var config = require('../config/config.js');
-
 const Imis = require('imis-server-sdk');
-const imis = new Imis(config.serverChan.imis, 'auto-deploy');
-
 module.exports = function(body, error) {
   var data = {
     text: config.serverChan.subject + (error ? '--失败' : ''),
     desp: body,
   }; //这是需要提交的数据
-
-  imis.send({
-    logs: body,
-    notice: 0,
-    title: data.text,
-  });
+  if (config.serverChan.imis) {
+    const imis = new Imis(config.serverChan.imis, 'auto-deploy');
+    imis.send({
+      logs: body,
+      notice: 0,
+      title: data.text,
+    });
+  }
   var content = qs.stringify(data);
   var options = {
     hostname: 'sc.ftqq.com',
