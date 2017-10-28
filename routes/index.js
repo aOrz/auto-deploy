@@ -10,4 +10,8 @@ router.all('/deploy/:module', function(req, res, next) {
   let ret = depoly(req.params.module);
   res.send(ret);
 });
+router.all('/deploy', function(req, res, next) {
+  let ret = depoly('', req);
+  res.send(ret);
+});
 module.exports = router;

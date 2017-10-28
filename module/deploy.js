@@ -26,12 +26,17 @@ function clone(moduleName) {
   }
 }
 
-module.exports = function(moduleName) {
+module.exports = function(moduleName, ctx) {
+  if (ctx) {
+    let { payload = {} } = ctx.request.body;
+    payload = JSON.parse(payload);
+    let {repository: {name}} = payload;
+    moduleName = name;
+  }
   let ret = 'ok';
   if (!shelljs.which('git')) {
     ret = 'Sorry, this script requires git';
   }
-  console.log(config.root, moduleName);
   let modulePath = path.resolve(config.root, moduleName);
   let exists = fs.existsSync(modulePath);
   if (exists) {
