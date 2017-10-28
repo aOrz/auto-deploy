@@ -26,13 +26,12 @@ function clone(moduleName) {
   }
 }
 
-module.exports = function(moduleName, ctx) {
-  if (ctx) {
-    let { payload = {} } = ctx.request.body;
-    payload = JSON.parse(payload);
-    let {repository: {name}} = payload;
-    moduleName = name;
-  }
+module.exports = function(ctx) {
+  debugger
+  let { payload = {} } = ctx.body;
+  payload = JSON.parse(payload);
+  let {repository: {name: moduleName}} = payload;
+  console.log(moduleName, 'name')
   let ret = 'ok';
   if (!shelljs.which('git')) {
     ret = 'Sorry, this script requires git';

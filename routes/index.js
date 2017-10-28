@@ -7,11 +7,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 router.all('/deploy/:module', function(req, res, next) {
-  let ret = depoly(req.params.module);
+  let ret = depoly(req);
   res.send(ret);
 });
 router.all('/deploy', function(req, res, next) {
-  let ret = depoly('', req);
+  let ret = depoly(req);
   res.send(ret);
 });
 module.exports = router;
