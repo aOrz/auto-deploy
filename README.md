@@ -9,3 +9,9 @@
 5. github 或 oschina 等 git 托管服务 项目-> settings -> Webhooks -> Add webhooks ->Payload URL -> 你的ip:9988/deploy
 
 如果你需要在服务器端运行，请安装 `forever`,`sudo npm i forever -g`, `forever start ./bin/www`
+
+## 分享交流
+
+打赏|加小助手进微信群
+:---:|:---:
+<img src="https://fddcn.cn/wp-content/uploads/2017/12/WechatIMG117.jpeg" width="200"/>  |  <img src="https://fddcn.cn/wp-content/uploads/2017/12/WechatIMG116.jpeg" width="200"/>
