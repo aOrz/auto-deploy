@@ -27,14 +27,20 @@ function clone(moduleName) {
 }
 
 module.exports = function(ctx) {
-  debugger
-  let { payload = {} } = ctx.body;
-  payload = JSON.parse(payload);
-  let {repository: {name: moduleName}} = payload;
-  console.log(moduleName, 'name')
+  let payload = ctx.body && ctx.body.payload;
+  try {
+    payload = typeof payload === 'string' ? JSON.parse(payload) : (payload || ctx.body);
+  } catch (err) {
+    return 'Invalid webhook payload';
+  }
+  let moduleName = payload && payload.repository && payload.repository.name;
+  // Repository names must be one path component and safe to pass to git.
+  if (typeof moduleName !== 'string' || !/^[A-Za-z0-9_.-]+$/.test(moduleName) || moduleName === '.' || moduleName === '..') {
+    return 'Invalid repository name';
+  }
   let ret = 'ok';
   if (!shelljs.which('git')) {
-    ret = 'Sorry, this script requires git';
+    return 'Sorry, this script requires git';
   }
   let modulePath = path.resolve(config.root, moduleName);
   let exists = fs.existsSync(modulePath);
